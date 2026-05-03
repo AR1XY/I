@@ -2,139 +2,219 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR1XY Space</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AR1XY INFO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Общие стили для темной темы */
-        :root {
-            --bg: #0d0d0f; /* Глубокий черный фон */
-            --card: rgba(255, 255, 255, 0.05); /* Прозрачные карточки */
-            --accent: #0088cc; /* Фирменный синий Telegram */
-            --ton-accent: #0098ea; /* Фирменный синий TON */
-            --text: #ffffff;
-            --text-dim: #9ca3af;
+        :root { 
+            --main: #007bff; 
+            --glow: rgba(0, 123, 255, 0.4); 
+            --bg: #000;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+        [data-theme="red"] { --main: #ff3131; --glow: rgba(255, 49, 49, 0.4); }
+        [data-theme="gold"] { --main: #ffca28; --glow: rgba(255, 202, 40, 0.4); }
+        [data-theme="hacker"] { --main: #00ff41; --glow: rgba(0, 255, 65, 0.4); }
+
+        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; overflow-x: hidden; }
+        
+        .container { 
+            width: 100%; max-width: 420px; padding: 20px; text-align: center; box-sizing: border-box; 
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            padding-top: 60px; /* Отступ сверху для мобильных */
-        }
-
-        .container {
-            width: 90%;
-            max-width: 400px; /* Идеальная ширина для телефона */
-            text-align: center;
-        }
-
-        /* Стильная аватарка с градиентом и свечением */
+        /* Аватарка */
+        .profile-header { margin-bottom: 20px; }
         .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 25px;
-            overflow: hidden; /* Чтобы изображение не вылезало за края */
-            border: 3px solid rgba(255, 255, 255, 0.1); /* Тонкая рамка */
-            box-shadow: 0 0 25px rgba(0, 136, 204, 0.4); /* Свечение */
+            width: 100px; height: 100px; border-radius: 50%;
+            border: 3px solid var(--main); box-shadow: 0 0 20px var(--glow);
+            object-fit: cover; margin-bottom: 15px;
         }
 
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Изображение заполнит круг, не искажаясь */
+        .theme-selector { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; width: 100%; }
+        .t-dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        .t-dot:hover { transform: scale(1.2); }
+
+        h1 { font-size: 32px; font-weight: 900; color: var(--main); text-shadow: 0 0 15px var(--glow); margin: 0; cursor: pointer; text-transform: uppercase; }
+        .status { color: #00ff41; font-size: 13px; margin-bottom: 20px; opacity: 0.9; }
+
+        /* Ссылки */
+        .btn-link {
+            width: 100%; padding: 16px; border-radius: 16px; font-weight: 800; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            text-decoration: none; color: #fff !important; margin-bottom: 12px; border: none;
+            box-sizing: border-box; transition: 0.2s; text-transform: uppercase;
+        }
+        .btn-link:active { transform: scale(0.95); }
+        .c-primary { background: var(--main); box-shadow: 0 5px 15px var(--glow); }
+        .c-outline { background: rgba(255,255,255,0.03); border: 2px solid var(--main); color: var(--main) !important; }
+
+        /* Блок доната */
+        .donate-box {
+            background: linear-gradient(135deg, #0088cc, #0098ea);
+            width: 100%; padding: 20px; border-radius: 20px; margin-bottom: 20px;
+            box-sizing: border-box; text-decoration: none; color: white; display: block;
         }
 
-        h1 { font-size: 26px; margin: 10px 0 5px; font-weight: 800; }
-        .description { color: var(--text-dim); margin-bottom: 35px; font-size: 16px; }
+        /* Кликер и Баланс */
+        .balance-box { background: var(--card-bg); border-radius: 20px; padding: 20px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); width: 100%; box-sizing: border-box; }
+        #bal-val { font-size: 34px; color: #ffca28; font-weight: 900; }
 
-        /* Карточки-ссылки */
-        .card {
-            background: var(--card);
-            backdrop-filter: blur(15px); /* Эффект матового стекла */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 22px;
-            margin-bottom: 18px;
-            text-decoration: none;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
+        #btn-clicker { 
+            background: #111; border: 2px solid var(--main); height: 70px; font-size: 18px; 
+            color: #fff; cursor: pointer; border-radius: 16px; width: 100%; font-weight: 800; 
+            text-transform: uppercase; margin-bottom: 15px; box-shadow: 0 0 10px var(--glow);
         }
 
-        /* Эффект при нажатии */
-        .card:active {
-            transform: scale(0.96);
-            background: rgba(255, 255, 255, 0.08);
-        }
+        /* Игры */
+        .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 15px; }
+        .btn-game { background: #000; border: 1px solid var(--main); color: #fff; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 12px; }
 
-        /* Кнопка доната */
-        .donate-btn {
-            background: var(--ton-accent);
-            color: white;
-            padding: 16px;
-            border-radius: 14px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-weight: bold;
-            margin-top: 10px;
-            width: 100%; /* На всю ширину карточки */
-            transition: opacity 0.2s;
-        }
-
-        .donate-btn:active { opacity: 0.8; }
-
-        /* Иконки */
-        .icon { font-size: 24px; color: var(--accent); }
-        .icon-ton { font-size: 24px; color: var(--ton-accent); }
-
-        /* Текст в футере */
-        .footer-text {
-            margin-top: 40px;
-            font-size: 12px;
-            color: var(--text-dim);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        /* Модалки (игры) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        .mines-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-width: 320px; }
+        .cell { width: 55px; height: 55px; background: #111; border: 1px solid var(--main); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        
+        .plus-one { position: absolute; color: #ffca28; font-weight: 900; font-size: 30px; animation: flyUp 0.8s forwards; pointer-events: none; }
+        @keyframes flyUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-120px); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="avatar">
-            <img src="IMG_20260503_090548_399.jpg" alt="AR1XY">
-        </div>
-        <h1>AR1XY</h1>
-        <p class="description">Digital Creator & TON enthusiast</p>
-
-        <a href="https://t.me/odwob" class="card">
-            <i class="fab fa-telegram icon"></i>
-            <div style="font-weight: 500;">Мой Telegram</div>
-        </a>
-
-        <div class="card">
-            <i class="fa-solid fa-gem icon-ton"></i>
-            <div style="margin-bottom: 5px; font-weight: bold;">Поддержать автора</div>
-            <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 15px;">Донат в TON через Crypto Bot</p>
-            <a href="http://t.me/send?start=IVhsZKupZNYf" class="donate-btn">
-                <i class="fa-solid fa-bolt"></i> Отправить Crypto
-            </a>
-        </div>
-
-        <div class="footer-text">MADE WITH MOBILE</div>
+<div class="container">
+    <div class="theme-selector">
+        <div class="t-dot" style="background:#007bff" onclick="setTheme('default')"></div>
+        <div class="t-dot" style="background:#ff3131" onclick="setTheme('red')"></div>
+        <div class="t-dot" style="background:#ffca28" onclick="setTheme('gold')"></div>
+        <div class="t-dot" style="background:#00ff41" onclick="setTheme('hacker')"></div>
     </div>
 
+    <div class="profile-header">
+        <img src="IMG_20260503_090548_399.jpg" alt="AR1XY" class="avatar">
+        <h1 id="adm-trigger">AR1XY</h1>
+        <div class="status">● Online</div>
+    </div>
+
+    <a href="https://t.me/odwob" target="_blank" class="btn-link c-primary"><i class="fab fa-telegram"></i> МОЯ ЛИЧКА</a>
+    <a href="https://t.me/Lqphu" target="_blank" class="btn-link c-outline"><i class="fas fa-users"></i> ТГ КАНАЛ</a>
+    <a href="https://www.tiktok.com/@ar1xy.ru" target="_blank" class="btn-link c-outline"><i class="fab fa-tiktok"></i> TIK TOK</a>
+
+    <a href="http://t.me/send?start=IVhsZKupZNYf" target="_blank" class="donate-box">
+        <div style="font-size: 18px; font-weight: 900;"><i class="fa-solid fa-bolt"></i> ПОДДЕРЖАТЬ (TON)</div>
+        <div style="font-size: 12px; opacity: 0.9; margin-top: 5px;">Донат через Crypto Bot</div>
+    </a>
+
+    <div class="balance-box">
+        <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 5px;">ВАШ БАЛАНС</div>
+        <span id="bal-val">0</span> 💸
+    </div>
+
+    <button id="btn-clicker" onclick="doClick(event)">КЛИКАТЬ (+1 💸)</button>
+
+    <div class="game-grid">
+        <button onclick="initMines()" class="btn-game">МИНЫ</button>
+        <button onclick="startCrash()" class="btn-game">КРАШ</button>
+        <button onclick="initCaseOpening(100)" class="btn-game">LITE CASE</button>
+        <button onclick="initCaseOpening(1000)" class="btn-game">PRO CASE</button>
+    </div>
+</div>
+
+<div id="m-admin" class="modal">
+    <div style="background:#111; padding:30px; border-radius:20px; border:2px solid var(--main); width:100%; max-width:300px; text-align:center;">
+        <h2>ADMIN</h2>
+        <button class="btn-link c-primary" onclick="bal+=10000; save(); alert('+10К');">ГАРЯЧИЕ 10К</button>
+        <button onclick="closeModals()" style="color:#666; background:none; border:none; margin-top:10px;">ЗАКРЫТЬ</button>
+    </div>
+</div>
+
+<div id="m-mines" class="modal">
+    <div id="mines-board" class="mines-grid"></div>
+    <button id="take-btn" onclick="takeMines()" class="btn-link c-primary" style="display:none; margin-top:20px;">ЗАБРАТЬ</button>
+    <button onclick="closeModals()" style="color:#555; background:none; border:none; margin-top:20px;">ВЫЙТИ</button>
+</div>
+
+<div id="m-case-opening" class="modal">
+    <div style="text-align:center;">
+        <h2 id="opening-case-title">ОТКРЫТИЕ...</h2>
+        <div style="font-size:40px; color:#ffca28; font-weight:900; margin:20px 0;"><span id="opening-val">0</span> 💸</div>
+        <button id="case-close-btn" onclick="closeModals()" class="btn-link c-primary" style="display:none;">ОК</button>
+    </div>
+</div>
+
+<script>
+    let bal = parseInt(localStorage.getItem('ar_bal')) || 0;
+    let lastD = localStorage.getItem('ar_d') || 0;
+    let promos = JSON.parse(localStorage.getItem('ar_promos')) || {};
+    let mPos = [], mWin = 0, mActive = false;
+
+    function save() {
+        localStorage.setItem('ar_bal', bal);
+        document.getElementById('bal-val').innerText = bal.toLocaleString();
+    }
+
+    function setTheme(t) {
+        if(t === 'default') document.body.removeAttribute('data-theme');
+        else document.body.setAttribute('data-theme', t);
+        localStorage.setItem('ar_theme', t);
+    }
+
+    function doClick(e) {
+        bal++; save();
+        const p = document.createElement('div');
+        p.className = 'plus-one'; p.innerText = '+1';
+        p.style.left = (e.clientX || window.innerWidth/2) + 'px'; 
+        p.style.top = (e.clientY || window.innerHeight/2) + 'px';
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 800);
+    }
+
+    let taps = 0;
+    document.getElementById('adm-trigger').onclick = () => {
+        taps++; if(taps >= 5) { if(prompt("PASSWORD")==="1234") openModal('m-admin'); taps=0; }
+    };
+
+    // Логика игр (Мины, Краш, Кейсы) скопирована из твоего кода без изменений
+    function initMines() {
+        if(bal < 100) return alert("Нужно 100 💸");
+        bal -= 100; mWin = 0; mActive = true; mPos = [];
+        while(mPos.length < 4) { let r = Math.floor(Math.random()*25); if(!mPos.includes(r)) mPos.push(r); }
+        openModal('m-mines');
+        let b = document.getElementById('mines-board'); b.innerHTML = '';
+        for(let i=0; i<25; i++) {
+            let c = document.createElement('div'); c.className = 'cell';
+            c.onclick = () => {
+                if(!mActive || c.innerText) return;
+                if(mPos.includes(i)) { c.innerText='💣'; mActive=false; alert("БУМ!"); closeModals(); }
+                else { c.innerText='💎'; mWin += 50; document.getElementById('take-btn').style.display='block'; document.getElementById('take-btn').innerText=`ЗАБРАТЬ (${mWin+100})`; }
+            };
+            b.appendChild(c);
+        }
+        save();
+    }
+    function takeMines() { bal += (100 + mWin); mActive = false; closeModals(); save(); }
+    function startCrash() {
+        if(bal < 100) return alert("Нужно 100 💸");
+        bal -= 100; let m = (Math.random()*3).toFixed(2);
+        if(m < 1.1) alert("CRASH (1.0x)!"); else { let w = Math.floor(100*m); bal += w; alert("ВЫИГРЫШ: " + w + " (x"+m+")"); }
+        save();
+    }
+    function initCaseOpening(cost) {
+        if(bal < cost) return alert("Мало 💸");
+        bal -= cost; save();
+        document.getElementById('case-close-btn').style.display = 'none';
+        openModal('m-case-opening');
+        let win = cost === 100 ? [50, 150, 500][Math.floor(Math.random()*3)] : [500, 2500, 7000][Math.floor(Math.random()*3)];
+        let i = 0;
+        let timer = setInterval(() => {
+            document.getElementById('opening-val').innerText = Math.floor(Math.random() * win);
+            if(i++ > 15) { clearInterval(timer); document.getElementById('opening-val').innerText = win; bal += win; save(); document.getElementById('case-close-btn').style.display = 'block'; }
+        }, 60);
+    }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display='none'); }
+    if(localStorage.getItem('ar_theme')) setTheme(localStorage.getItem('ar_theme'));
+    save();
+</script>
 </body>
 </html>
