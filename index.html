@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dark Page</title>
+    <title>AR1XY Space</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Общие стили (Темная тема) */
+        /* Общие стили для темной темы */
         :root {
-            --bg: #0a0a0c;
-            --card: rgba(255, 255, 255, 0.06);
-            --accent: #0088cc;
+            --bg: #0d0d0f; /* Глубокий черный фон */
+            --card: rgba(255, 255, 255, 0.05); /* Прозрачные карточки */
+            --accent: #0088cc; /* Фирменный синий Telegram */
+            --ton-accent: #0098ea; /* Фирменный синий TON */
             --text: #ffffff;
             --text-dim: #9ca3af;
         }
@@ -23,82 +24,89 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            padding-top: 50px;
+            padding-top: 60px; /* Отступ сверху для мобильных */
         }
 
         .container {
             width: 90%;
-            max-width: 400px;
+            max-width: 400px; /* Идеальная ширина для телефона */
             text-align: center;
         }
 
-        /* Аватарка с градиентом */
+        /* Стильная аватарка с градиентом */
         .avatar {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(45deg, #0088cc, #00d2ff);
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
+            margin: 0 auto 25px;
+            overflow: hidden; /* Чтобы изображение не вылезало за края */
+            border: 3px solid rgba(255, 255, 255, 0.1); /* Тонкая рамка */
+            box-shadow: 0 0 25px rgba(0, 136, 204, 0.4); /* Свечение */
         }
 
-        h1 { font-size: 24px; margin: 10px 0; }
-        .description { color: var(--text-dim); margin-bottom: 30px; font-size: 16px; }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Изображение заполнит круг, не искажаясь */
+        }
 
-        /* Карточки */
+        h1 { font-size: 26px; margin: 10px 0 5px; font-weight: 800; }
+        .description { color: var(--text-dim); margin-bottom: 35px; font-size: 16px; }
+
+        /* Карточки-ссылки */
         .card {
             background: var(--card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            padding: 20px;
-            margin-bottom: 15px;
+            backdrop-filter: blur(15px); /* Эффект матового стекла */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 18px;
             text-decoration: none;
             color: white;
-            display: block;
-            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
         }
 
+        /* Эффект при нажатии */
         .card:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* Кнопка доната */
         .donate-btn {
-            background: var(--accent);
+            background: var(--ton-accent);
             color: white;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 14px;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             font-weight: bold;
-            margin-top: 15px;
+            margin-top: 10px;
+            width: 100%; /* На всю ширину карточки */
             transition: opacity 0.2s;
         }
 
-        .donate-btn:active {
-            opacity: 0.8;
-        }
+        .donate-btn:active { opacity: 0.8; }
 
-        .icon {
-            font-size: 20px;
-            margin-bottom: 5px;
-            color: var(--accent);
-        }
+        /* Иконки */
+        .icon { font-size: 24px; color: var(--accent); }
+        .icon-ton { font-size: 24px; color: var(--ton-accent); }
 
+        /* Текст в футере */
         .footer-text {
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 12px;
             color: var(--text-dim);
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -106,31 +114,26 @@
 
     <div class="container">
         <div class="avatar">
-            <i class="fa-solid fa-user-ninja"></i>
+            <img src="your-avatar.jpg" alt="AR1XY">
         </div>
-        <h1>Твое Имя</h1>
-        <p class="description">Digital Creator & Developer</p>
+        <h1>AR1XY</h1>
+        <p class="description">Digital Creator & TON enthusiast</p>
 
-        <a href="https://t.me/твой_ник" class="card">
+        <a href="https://t.me/odwob" class="card">
             <i class="fab fa-telegram icon"></i>
-            <div>Мой Telegram</div>
-        </a>
-
-        <a href="#" class="card">
-            <i class="fab fa-github icon"></i>
-            <div>Мои проекты на GitHub</div>
+            <div style="font-weight: 500;">Мой Telegram</div>
         </a>
 
         <div class="card">
-            <i class="fa-solid fa-gem icon"></i>
-            <div style="margin-bottom: 10px; font-weight: bold;">Поддержать автора</div>
-            <p style="font-size: 13px; color: var(--text-dim);">Буду благодарен за любой донат в крипте!</p>
+            <i class="fa-solid fa-gem icon-ton"></i>
+            <div style="margin-bottom: 5px; font-weight: bold;">Поддержать автора</div>
+            <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 15px;">Донат в TON через Crypto Bot</p>
             <a href="http://t.me/send?start=IVhsZKupZNYf" class="donate-btn">
                 <i class="fa-solid fa-bolt"></i> Отправить Crypto
             </a>
         </div>
 
-        <div class="footer-text">MADE ON MOBILE</div>
+        <div class="footer-text">MADE WITH MOBILE</div>
     </div>
 
 </body>
