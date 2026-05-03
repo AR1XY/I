@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dark Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Общие стили (Темная тема) */
+        :root {
+            --bg: #0a0a0c;
+            --card: rgba(255, 255, 255, 0.06);
+            --accent: #0088cc;
+            --text: #ffffff;
+            --text-dim: #9ca3af;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Аватарка с градиентом */
+        .avatar {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(45deg, #0088cc, #00d2ff);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
+        }
+
+        h1 { font-size: 24px; margin: 10px 0; }
+        .description { color: var(--text-dim); margin-bottom: 30px; font-size: 16px; }
+
+        /* Карточки */
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .card:active {
+            transform: scale(0.97);
+        }
+
+        /* Кнопка доната */
+        .donate-btn {
+            background: var(--accent);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: opacity 0.2s;
+        }
+
+        .donate-btn:active {
+            opacity: 0.8;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="avatar">
+            <i class="fa-solid fa-user-ninja"></i>
+        </div>
+        <h1>Твое Имя</h1>
+        <p class="description">Digital Creator & Developer</p>
+
+        <a href="https://t.me/твой_ник" class="card">
+            <i class="fab fa-telegram icon"></i>
+            <div>Мой Telegram</div>
+        </a>
+
+        <a href="#" class="card">
+            <i class="fab fa-github icon"></i>
+            <div>Мои проекты на GitHub</div>
+        </a>
+
+        <div class="card">
+            <i class="fa-solid fa-gem icon"></i>
+            <div style="margin-bottom: 10px; font-weight: bold;">Поддержать автора</div>
+            <p style="font-size: 13px; color: var(--text-dim);">Буду благодарен за любой донат в крипте!</p>
+            <a href="http://t.me/send?start=IVhsZKupZNYf" class="donate-btn">
+                <i class="fa-solid fa-bolt"></i> Отправить Crypto
+            </a>
+        </div>
+
+        <div class="footer-text">MADE ON MOBILE</div>
+    </div>
+
+</body>
+</html>
